@@ -7,16 +7,16 @@ from common.libs.UrlManager import UrlManager
 
 
 class Application(Flask):
-    def __init__(self, import_name, template_folder=None, root_path=None):
+    def __init__(self, import_name, template_folder=None, root_path=None, static_folder=None):
         # static_folder 由于自己已经重新定义了 所以这里初始化为None  root_path是为了解决找不到静态路由的
-        super(Application, self).__init__(import_name, template_folder=template_folder)
+        super(Application, self).__init__(import_name, template_folder=template_folder, static_folder=static_folder)
         if "environ" in os.environ:
             self.config.from_pyfile('../config/%s_setting.py' % os.environ['environ'].strip())
         # 此回调可用于初始化用于此数据库设置的应用程序
         db.init_app(self)
 
 db = SQLAlchemy()
-app = Application(__name__, template_folder= os.getcwd()+ "/web/templates")
+app = Application(__name__, template_folder= os.getcwd()+ "/web/templates", static_folder=os.getcwd()+"/web/static")
 
 manager = Manager(app)
 
