@@ -1,10 +1,11 @@
 from jobs.launcher import runJob
 from web.application  import app, manager
 
-from flask_script import Server
+from flask_script import Server, Option
 # 在入口文件处 导入蓝图
 import web.www
 # web server
+# Server flask开发服务器
 manager.add_command("runserver", Server( port=app.config["SERVER_PORT"], use_debugger=True, use_reloader=True))
 
 
