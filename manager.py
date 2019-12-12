@@ -4,7 +4,7 @@ from web.application  import app, manager
 from flask_script import Server
 # 在入口文件处 导入蓝图
 import web.www
-## web server
+# web server
 manager.add_command("runserver", Server( port=app.config["SERVER_PORT"], use_debugger=True, use_reloader=True))
 
 

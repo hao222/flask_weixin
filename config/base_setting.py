@@ -9,8 +9,7 @@ AUTH_COOKIE_NAME = "food_"
 
 # 过滤url
 IGNORE_URLS = [
-    "^/user/login",
-    "^/api"
+    "^/user/login"
 ]
 
 IGNORE_CHECK_LOGIN_URLS = [

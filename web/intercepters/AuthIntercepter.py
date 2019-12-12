@@ -13,7 +13,6 @@ def before_request():
     ignore_check_login_urls = app.config['IGNORE_CHECK_LOGIN_URLS']
 
     path = request.path
-
     pattern = re.compile('%s' % "|".join(ignore_check_login_urls))
     if pattern.match(path):
         return
