@@ -6,6 +6,7 @@ from flask_script import Manager, Command
 from common.libs.UrlManager import UrlManager
 
 # 配置按序加载
+# Flask-SQLAlchemy 从您的 Flask 主配置中加载一些固定的值
 class Application(Flask):
     def __init__(self, import_name, template_folder=None, root_path=None, static_folder=None):
         # static_folder 由于自己已经重新定义了 所以这里初始化为None  root_path是为了解决找不到静态路由的
