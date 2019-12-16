@@ -1,4 +1,5 @@
 import json
+import time
 
 from flask import Blueprint, render_template, request, jsonify, make_response, redirect, g
 
@@ -14,6 +15,8 @@ route_user = Blueprint('user_page', __name__)
 @route_user.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
+        if g.current_user:
+            return redirect(UrlManager.buildUrl("/"))
         return render_template_ops("user/login.html")
     resp = {'code': 200, 'msg': '登录成功', 'data':{}}
     req = request.values
@@ -42,6 +45,7 @@ def login():
         resp['msg'] = "账号被禁用"
         return jsonify(resp)
     response = make_response(json.dumps(resp))
+    # expires=time.time() + 10  设置过期时间 10s
     response.set_cookie(app.config['AUTH_COOKIE_NAME'], "%s#%s"%(UserService.setAuthcode(user_info), user_info.uid))
 
     return response
