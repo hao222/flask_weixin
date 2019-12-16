@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Blueprint, render_template,g
+from flask import Blueprint,g
 
 from common.libs.Helper import render_template_ops, getFormatDate
 from common.models.stat.StatDailySite import StatDailySite

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# 下单支付
+
 from flask import Blueprint,request,redirect,jsonify
 from common.libs.Helper import render_template_ops
 from common.models.member.Member import Member

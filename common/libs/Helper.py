@@ -72,6 +72,7 @@ def getCurrentDate(format = "%Y-%m-%d %H:%M:%S"):
 
 """
 根据某个字段获取结果集的dict 
+{1: <Food 1>, 2: <Food 2>, 3: <Food 3>}
 """
 def getDictFilterField(db_model, select_field, key_field, id_list):
     ret = {}
@@ -103,6 +104,14 @@ def selectFilterObj(obj, field):
 
 
 def getDictListFilterField(db_model, select_field, key_field, id_list):
+    """
+    ret = {1:[obj1,obj2]}
+    :param db_model:
+    :param select_field:
+    :param key_field:
+    :param id_list:
+    :return:
+    """
     ret = {}
     query = db_model.query
     if id_list and len(id_list) > 0:
