@@ -17,7 +17,7 @@ def login():
     if request.method == "GET":
         if g.current_user:
             return redirect(UrlManager.buildUrl("/"))
-        return render_template_ops("user/login.html")
+        return render_template_ops("user/login.html", {'SEO_TITLE':app.config['SEO_TITLE']})
     resp = {'code': 200, 'msg': '登录成功', 'data':{}}
     req = request.values
     login_name = req.get("login_name", '')
@@ -86,9 +86,15 @@ def resetPwd():
 
     resp = {'code': 200, 'msg': '操作成功~', 'data': {}}
     req = request.values
+    user_info = g.current_user
 
     old_password = req['old_password'] if 'old_password' in req else ''
     new_password = req['new_password'] if 'new_password' in req else ''
+
+    if user_info.login_pwd != UserService.getPwd(old_password, user_info.login_salt):
+        resp['code'] = -1
+        resp['msg'] = "原密码输入错误~~"
+        return jsonify(resp)
 
     if old_password is None or len( old_password ) < 6:
         resp['code'] = -1
@@ -119,7 +125,7 @@ def resetPwd():
     # 为了防止修改密码后直接退出   更新cookie
     response = make_response(json.dumps( resp ))
     response.set_cookie(app.config['AUTH_COOKIE_NAME'], '%s#%s' % (
-        UserService.setAuthcode(user_info), user_info.uid), 60 * 60 * 24 * 30)  # 保存30天
+        UserService.setAuthcode(user_info), user_info.uid), 60 * 60 * 24)  # 保存1天
     return response
 
 

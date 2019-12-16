@@ -72,6 +72,4 @@ PAY_STATUS_DISPLAY_MAPPING = {
     "-5":"待评价"
 }
 
-SEO_TITLE = {
-    "小程序维护中"
-}
+SEO_TITLE = "小程序维护中"
